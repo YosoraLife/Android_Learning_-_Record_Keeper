@@ -5,6 +5,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.yosora.recordkeeper.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +18,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.bottomNav
+        binding.buttonCycling.setOnClickListener { onCyclingClicked() }
+        binding.buttonRunning.setOnClickListener { onRunningClicked() }
+    }
 
+    private fun onRunningClicked() {
+        supportFragmentManager.commit {
+            replace(R.id.frame_content, RunningFragment())
+        }
+    }
+
+    private fun onCyclingClicked() {
+        supportFragmentManager.commit {
+            replace(R.id.frame_content, CyclingFragment())
+        }
     }
 }
