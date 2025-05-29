@@ -1,15 +1,14 @@
 package com.yosora.recordkeeper
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.commit
-import androidx.fragment.app.replace
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yosora.recordkeeper.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -18,8 +17,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.buttonCycling.setOnClickListener { onCyclingClicked() }
-        binding.buttonRunning.setOnClickListener { onRunningClicked() }
+        // binding.bottomNav.setOnNavigationItemSelectedListener(this) -> deprecated
+        binding.bottomNav.setOnItemSelectedListener(this)
+
     }
 
     private fun onRunningClicked() {
@@ -33,4 +33,17 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.frame_content, CyclingFragment())
         }
     }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.nav_cycling) {
+            onCyclingClicked()
+            return true
+        } else if (item.itemId == R.id.nav_running) {
+            onRunningClicked()
+            return true
+        } else {
+            return false
+        }
+    }
+
 }
