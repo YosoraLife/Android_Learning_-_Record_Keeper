@@ -2,4 +2,13 @@
     <string name="app_name">Record Keeper</string>
     <string name="running">Running</string>
     <string name="cycling">Cycling</string>
+    <string name="running_image">Running image</string>
+    <string name="_5km">5km</string>
+    <string name="_10km">10km</string>
+    <string name="half_marathon">Half marathon</string>
+    <string name="marathon">Marathon</string>
+    <string name="cycling_image">Cycling image</string>
+    <string name="longest_ride">Longest ride</string>
+    <string name="biggest_climb">Biggest climb</string>
+    <string name="best_average_speed">Best average speed</string>
 </resources>
