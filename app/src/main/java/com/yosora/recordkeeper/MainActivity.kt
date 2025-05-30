@@ -6,9 +6,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.navigation.NavigationBarView.OnItemSelectedListener
 import com.yosora.recordkeeper.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -17,33 +19,28 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // binding.bottomNav.setOnNavigationItemSelectedListener(this) -> deprecated
         binding.bottomNav.setOnItemSelectedListener(this)
 
     }
 
-    private fun onRunningClicked() {
+    private fun onRunningClicked(): Boolean {
         supportFragmentManager.commit {
             replace(R.id.frame_content, RunningFragment())
         }
+        return true
     }
 
-    private fun onCyclingClicked() {
+    private fun onCyclingClicked(): Boolean {
         supportFragmentManager.commit {
             replace(R.id.frame_content, CyclingFragment())
         }
+        return true
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.nav_cycling) {
-            onCyclingClicked()
-            return true
-        } else if (item.itemId == R.id.nav_running) {
-            onRunningClicked()
-            return true
-        } else {
-            return false
-        }
+    override fun onNavigationItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.nav_cycling -> onCyclingClicked()
+        R.id.nav_running -> onRunningClicked()
+        else -> false
     }
 
 }
