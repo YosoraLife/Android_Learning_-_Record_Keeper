@@ -1,13 +1,12 @@
 package com.yosora.recordkeeper
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
-import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
-import com.google.android.material.navigation.NavigationBarView.OnItemSelectedListener
 import com.yosora.recordkeeper.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
@@ -16,11 +15,32 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.bottomNav.setOnItemSelectedListener(this)
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.reset_running -> {
+            Toast.makeText(this, " Clicked the Reset Running menu item", Toast.LENGTH_LONG).show()
+            true
+        }
+        R.id.reset_cycling -> {
+            Toast.makeText(this, " Clicked the Reset Cycling menu item", Toast.LENGTH_LONG).show()
+            true
+        }
+        R.id.reset_all -> {
+            Toast.makeText(this, " Clicked the Reset All menu item", Toast.LENGTH_LONG).show()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     private fun onRunningClicked(): Boolean {
