@@ -7,7 +7,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.google.android.material.navigation.NavigationBarView
+import com.yosora.recordkeeper.cycling.CyclingFragment
 import com.yosora.recordkeeper.databinding.ActivityMainBinding
+import com.yosora.recordkeeper.running.RunningFragment
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
 
