@@ -1,4 +1,4 @@
-package com.yosora.recordkeeper
+package com.yosora.recordkeeper.cycling
 
 import android.content.Intent
 import android.os.Bundle
