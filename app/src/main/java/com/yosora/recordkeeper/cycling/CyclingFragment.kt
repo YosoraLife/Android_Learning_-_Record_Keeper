@@ -1,5 +1,6 @@
 package com.yosora.recordkeeper.cycling
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.yosora.recordkeeper.databinding.FragmentCyclingBinding
+import com.yosora.recordkeeper.editrecord.EditRecordActivity
 
 class CyclingFragment : Fragment() {
 
@@ -26,15 +28,31 @@ class CyclingFragment : Fragment() {
         setupClickListeners()
     }
 
-    private fun setupClickListeners() {
-        binding.containerLongestRide.setOnClickListener { launchCyclingRecordScreen("Longest Ride") }
-        binding.containerBiggestClimb.setOnClickListener { launchCyclingRecordScreen("Biggest Climb") }
-        binding.containerAverageSpeed.setOnClickListener { launchCyclingRecordScreen("Best Average Speed") }
+    override fun onResume() {
+        super.onResume()
+        displayRecord()
     }
 
-    private fun launchCyclingRecordScreen(record: String) {
-        val intent = Intent(context, EditCyclingRecordActivity::class.java)
-        intent.putExtra("Record", record)
+    private fun setupClickListeners() {
+        binding.containerLongestRide.setOnClickListener { launchCyclingRecordScreen("Longest Ride", "Distance") }
+        binding.containerBiggestClimb.setOnClickListener { launchCyclingRecordScreen("Biggest Climb", "Height") }
+        binding.containerAverageSpeed.setOnClickListener { launchCyclingRecordScreen("Best Average Speed", "Average Speed") }
+    }
+
+    private fun displayRecord() {
+        val cyclingPreferences = requireContext().getSharedPreferences("cycling", Context.MODE_PRIVATE )
+
+        binding.textViewLongestRideValue.text = cyclingPreferences.getString("Longest Ride record", null)
+        binding.textViewLongestRideDate.text = cyclingPreferences.getString("Longest Ride date", null)
+        binding.textViewBiggestClimbValue.text = cyclingPreferences.getString("Biggest Climb record", null)
+        binding.textViewBiggestClimbDate.text = cyclingPreferences.getString("Biggest Climb date", null)
+        binding.textViewAverageSpeedValue.text = cyclingPreferences.getString("Best Average Speed record", null)
+        binding.textViewAverageSpeedDate.text = cyclingPreferences.getString("Best Average Speed date", null)
+    }
+
+    private fun launchCyclingRecordScreen(record: String, recordFieldHint: String) {
+        val intent = Intent(context, EditRecordActivity::class.java)
+        intent.putExtra("screen_data", EditRecordActivity.ScreenData(record, "cycling", recordFieldHint))
         startActivity(intent)
     }
 }

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.yosora.recordkeeper.databinding.FragmentRunningBinding
+import com.yosora.recordkeeper.editrecord.EditRecordActivity
 
 class RunningFragment : Fragment() {
 
@@ -53,8 +54,8 @@ class RunningFragment : Fragment() {
     }
 
     private fun launchRunningRecordScreen(distance: String) {
-        val intent = Intent(context, EditRunningRecordActivity::class.java)
-        intent.putExtra("Distance", distance)
+        val intent = Intent(context, EditRecordActivity::class.java)
+        intent.putExtra("screen_data", EditRecordActivity.ScreenData(distance, "running", "Time"))
         startActivity(intent)
     }
 
