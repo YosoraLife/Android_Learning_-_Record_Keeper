@@ -1,13 +1,14 @@
 package com.yosora.recordkeeper
 
+import android.content.Context
 import android.os.Bundle
+import android.text.method.TextKeyListener.clear
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.content.edit
 import androidx.fragment.app.commit
 import com.google.android.material.navigation.NavigationBarView
 import com.yosora.recordkeeper.cycling.CyclingFragment
@@ -21,11 +22,6 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -38,20 +34,33 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.reset_running -> {
-            Toast.makeText(this, " Clicked the Reset Running menu item", Toast.LENGTH_LONG).show()
-            true
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val menuClickHandled = when (item.itemId) {
+            R.id.reset_running -> {
+                getSharedPreferences("running", Context.MODE_PRIVATE).edit { clear() }
+                true
+            }
+
+            R.id.reset_cycling -> {
+                getSharedPreferences("cycling", Context.MODE_PRIVATE).edit { clear() }
+                true
+            }
+
+            R.id.reset_all -> {
+                getSharedPreferences("running", Context.MODE_PRIVATE).edit { clear() }
+                getSharedPreferences("cycling", Context.MODE_PRIVATE).edit { clear() }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-        R.id.reset_cycling -> {
-            Toast.makeText(this, " Clicked the Reset Cycling menu item", Toast.LENGTH_LONG).show()
-            true
+
+        when (binding.bottomNav.selectedItemId) {
+            R.id.nav_running -> onRunningClicked()
+            R.id.nav_cycling -> onCyclingClicked()
+            else -> {}
         }
-        R.id.reset_all -> {
-            Toast.makeText(this, " Clicked the Reset All menu item", Toast.LENGTH_LONG).show()
-            true
-        }
-        else -> super.onOptionsItemSelected(item)
+
+        return menuClickHandled
     }
 
     private fun onRunningClicked(): Boolean {
