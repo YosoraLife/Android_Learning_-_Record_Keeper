@@ -9,43 +9,42 @@ import com.yosora.recordkeeper.databinding.ActivityEditRunningRecordBinding
 class EditRunningRecordActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditRunningRecordBinding
+    private val runningPreferences by lazy { getSharedPreferences("running", Context.MODE_PRIVATE) }
+    private val distance by lazy { intent.getStringExtra("Distance") }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditRunningRecordBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val distance = intent.getStringExtra("Distance")
-        title = "$distance Record"
 
-        displayRecord(distance)
-        binding.buttonSave.setOnClickListener {
-            saveRecord(distance)
-            finish()
-        }
-//        binding.buttonDelete.setOnClickListener {
-//          deleteRecord(distance)
-//          finish()
-//        }
-
+        setupUi()
+        displayRecord()
     }
 
-    private fun displayRecord(distance: String?) {
+    private fun setupUi() {
+        title = "$distance Record"
+        binding.buttonSave.setOnClickListener {
+            saveRecord()
+            finish()
+        }
+        binding.buttonDelete.setOnClickListener {
+            clearRecord()
+            finish()
+        }
+    }
+
+    private fun displayRecord() {
         val runningPreferences = getSharedPreferences("running", Context.MODE_PRIVATE)
 
         binding.editTextRecord.setText(runningPreferences.getString("$distance record", null))
         binding.editTextDate.setText(runningPreferences.getString("$distance date", null))
     }
 
-    private fun saveRecord(distance: String?) {
+    private fun saveRecord() {
         val record = binding.editTextRecord.text.toString()
         val date = binding.editTextDate.text.toString()
 
         val runningPreferences = getSharedPreferences("running", Context.MODE_PRIVATE)
-
-//        val editor = runningPreferences.edit()
-//        editor.putString("$distance record", record)
-//        editor.putString("$distance date", date)
-//        editor.apply()
 
         runningPreferences.edit {
             putString("$distance record", record)
@@ -53,7 +52,10 @@ class EditRunningRecordActivity : AppCompatActivity() {
         }
     }
 
-//    private fun deleteRecord(distance: String?) {
-//        TODO("Not yet implemented")
-//    }
+    private fun clearRecord() {
+        runningPreferences.edit {
+            remove("$distance record")
+            remove("$distance date")
+        }
+    }
 }
