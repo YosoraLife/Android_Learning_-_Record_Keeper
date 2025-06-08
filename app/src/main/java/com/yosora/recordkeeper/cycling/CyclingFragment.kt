@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.yosora.recordkeeper.CYCLING
 import com.yosora.recordkeeper.databinding.FragmentCyclingBinding
 import com.yosora.recordkeeper.editrecord.EditRecordActivity
+import com.yosora.recordkeeper.editrecord.INTENT_EXTRA_SCREEN_DATA
 
 class CyclingFragment : Fragment() {
 
@@ -53,7 +54,7 @@ class CyclingFragment : Fragment() {
 
     private fun launchCyclingRecordScreen(record: String, recordFieldHint: String) {
         val intent = Intent(context, EditRecordActivity::class.java)
-        intent.putExtra("screen_data", EditRecordActivity.ScreenData(record, CYCLING, recordFieldHint))
+        intent.putExtra(INTENT_EXTRA_SCREEN_DATA, EditRecordActivity.ScreenData(record, CYCLING, recordFieldHint))
         startActivity(intent)
     }
 }
