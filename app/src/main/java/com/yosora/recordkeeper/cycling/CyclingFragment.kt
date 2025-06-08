@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.yosora.recordkeeper.CYCLING
 import com.yosora.recordkeeper.databinding.FragmentCyclingBinding
 import com.yosora.recordkeeper.editrecord.EditRecordActivity
 
@@ -40,7 +41,7 @@ class CyclingFragment : Fragment() {
     }
 
     private fun displayRecord() {
-        val cyclingPreferences = requireContext().getSharedPreferences("cycling", Context.MODE_PRIVATE )
+        val cyclingPreferences = requireContext().getSharedPreferences(CYCLING, Context.MODE_PRIVATE )
 
         binding.textViewLongestRideValue.text = cyclingPreferences.getString("Longest Ride record", null)
         binding.textViewLongestRideDate.text = cyclingPreferences.getString("Longest Ride date", null)
@@ -52,7 +53,7 @@ class CyclingFragment : Fragment() {
 
     private fun launchCyclingRecordScreen(record: String, recordFieldHint: String) {
         val intent = Intent(context, EditRecordActivity::class.java)
-        intent.putExtra("screen_data", EditRecordActivity.ScreenData(record, "cycling", recordFieldHint))
+        intent.putExtra("screen_data", EditRecordActivity.ScreenData(record, CYCLING, recordFieldHint))
         startActivity(intent)
     }
 }

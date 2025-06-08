@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.yosora.recordkeeper.RUNNING
 import com.yosora.recordkeeper.databinding.FragmentRunningBinding
 import com.yosora.recordkeeper.editrecord.EditRecordActivity
 
@@ -41,7 +42,7 @@ class RunningFragment : Fragment() {
     }
 
     private fun displayRecord() {
-        val runningPreferences = requireContext().getSharedPreferences("running", Context.MODE_PRIVATE )
+        val runningPreferences = requireContext().getSharedPreferences(RUNNING, Context.MODE_PRIVATE )
 
         binding.textView5kmValue.text = runningPreferences.getString("5km record", null)
         binding.textView5kmDate.text = runningPreferences.getString("5km date", null)
@@ -55,7 +56,7 @@ class RunningFragment : Fragment() {
 
     private fun launchRunningRecordScreen(distance: String) {
         val intent = Intent(context, EditRecordActivity::class.java)
-        intent.putExtra("screen_data", EditRecordActivity.ScreenData(distance, "running", "Time"))
+        intent.putExtra("screen_data", EditRecordActivity.ScreenData(distance, RUNNING, "Time"))
         startActivity(intent)
     }
 

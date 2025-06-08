@@ -1,11 +1,8 @@
 package com.yosora.recordkeeper
 
-import android.content.Context
 import android.os.Bundle
-import android.text.method.TextKeyListener.clear
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +13,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.yosora.recordkeeper.cycling.CyclingFragment
 import com.yosora.recordkeeper.databinding.ActivityMainBinding
 import com.yosora.recordkeeper.running.RunningFragment
+
+const val RUNNING = "running"
+const val CYCLING = "cycling"
+const val ALL = "all"
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
 
@@ -39,15 +40,15 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val menuClickHandled = when (item.itemId) {
             R.id.reset_running -> {
-                showConfirmationDialog("running")
+                showConfirmationDialog(RUNNING)
                 true
             }
             R.id.reset_cycling -> {
-                showConfirmationDialog("cycling")
+                showConfirmationDialog(CYCLING)
                 true
             }
             R.id.reset_all -> {
-                showConfirmationDialog("all")
+                showConfirmationDialog(ALL)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -62,9 +63,9 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             .setMessage("Are you sure you want to clear the records?")
             .setPositiveButton("Yes") { _, _ ->
                 when (selection) {
-                    "all" -> {
-                        getSharedPreferences("running", MODE_PRIVATE).edit { clear() }
-                        getSharedPreferences("cycling", MODE_PRIVATE).edit { clear() }
+                    ALL -> {
+                        getSharedPreferences(RUNNING, MODE_PRIVATE).edit { clear() }
+                        getSharedPreferences(CYCLING, MODE_PRIVATE).edit { clear() }
                     }
                     else -> getSharedPreferences(selection, MODE_PRIVATE).edit { clear() }
                 }
