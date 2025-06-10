@@ -59,33 +59,28 @@
 
                 <TextView
                     android:id="@+id/text_view_longest_ride_title"
+                    style="@style/RecordNameTextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
                     android:text="@string/longest_ride"
-                    android:textColor="?attr/colorPrimary"
-                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/text_view_longest_ride_value"
+                    style="@style/RecordValueTextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="10km" />
 
                 <TextView
                     android:id="@+id/text_view_longest_ride_date"
+                    style="@style/RecordDateTextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="sans-serif-light"
-                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_view_longest_ride_value"
                     tools:text="29/11/2020" />
@@ -107,33 +102,28 @@
 
                 <TextView
                     android:id="@+id/text_view_biggest_climb_title"
+                    style="@style/RecordNameTextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
                     android:text="@string/biggest_climb"
-                    android:textColor="?attr/colorPrimary"
-                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/text_view_biggest_climb_value"
+                    style="@style/RecordValueTextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="3km" />
 
                 <TextView
                     android:id="@+id/text_view_biggest_climb_date"
+                    style="@style/RecordDateTextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="sans-serif-light"
-                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_view_biggest_climb_value"
                     tools:text="29/11/2020" />
@@ -155,33 +145,28 @@
 
                 <TextView
                     android:id="@+id/text_view_average_speed_title"
+                    style="@style/RecordNameTextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
                     android:text="@string/best_average_speed"
-                    android:textColor="?attr/colorPrimary"
-                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/text_view_average_speed_value"
+                    style="@style/RecordValueTextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="25km/u" />
 
                 <TextView
                     android:id="@+id/text_view_average_speed_date"
+                    style="@style/RecordDateTextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="sans-serif-light"
-                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_view_average_speed_value"
                     tools:text="29/11/2020" />
