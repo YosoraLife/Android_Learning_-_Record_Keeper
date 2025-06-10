@@ -14,9 +14,6 @@ import com.yosora.recordkeeper.cycling.CyclingFragment
 import com.yosora.recordkeeper.databinding.ActivityMainBinding
 import com.yosora.recordkeeper.running.RunningFragment
 
-const val RUNNING = "running"
-const val CYCLING = "cycling"
-const val ALL = "all"
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
 
@@ -40,15 +37,15 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val menuClickHandled = when (item.itemId) {
             R.id.reset_running -> {
-                showConfirmationDialog(RUNNING)
+                showConfirmationDialog(RUNNING_DISPLAY_VALUE)
                 true
             }
             R.id.reset_cycling -> {
-                showConfirmationDialog(CYCLING)
+                showConfirmationDialog(CYCLING_DISPLAY_VALUE)
                 true
             }
             R.id.reset_all -> {
-                showConfirmationDialog(ALL)
+                showConfirmationDialog(ALL_DISPLAY_VALUE)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -63,11 +60,16 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             .setMessage("Are you sure you want to clear the records?")
             .setPositiveButton("Yes") { _, _ ->
                 when (selection) {
-                    ALL -> {
-                        getSharedPreferences(RUNNING, MODE_PRIVATE).edit { clear() }
-                        getSharedPreferences(CYCLING, MODE_PRIVATE).edit { clear() }
+                    ALL_DISPLAY_VALUE -> {
+                        getSharedPreferences(RUNNING_DISPLAY_VALUE, MODE_PRIVATE).edit { clear() }
+                        getSharedPreferences(CYCLING_DISPLAY_VALUE, MODE_PRIVATE).edit { clear() }
                     }
-                    else -> getSharedPreferences(selection, MODE_PRIVATE).edit { clear() }
+                    RUNNING_DISPLAY_VALUE -> {
+                        getSharedPreferences(RUNNING_DISPLAY_VALUE, MODE_PRIVATE).edit { clear() }
+                    }
+                    CYCLING_DISPLAY_VALUE -> {
+                        getSharedPreferences(CYCLING_DISPLAY_VALUE, MODE_PRIVATE).edit { clear() }
+                    }
                 }
                 refreshCurrentFragment()
                 showConfirmation()
@@ -113,6 +115,14 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         R.id.nav_cycling -> onCyclingClicked()
         R.id.nav_running -> onRunningClicked()
         else -> false
+    }
+
+    companion object {
+
+        const val RUNNING_DISPLAY_VALUE = "running"
+        const val CYCLING_DISPLAY_VALUE = "cycling"
+        const val ALL_DISPLAY_VALUE = "all"
+
     }
 
 }

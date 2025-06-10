@@ -1,7 +1,6 @@
 package com.yosora.recordkeeper.editrecord
 
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -49,8 +48,8 @@ class EditRecordActivity : AppCompatActivity() {
     private fun displayRecord() {
         val runningPreferences = getSharedPreferences(screenData.sharedPreferencesName, MODE_PRIVATE)
 
-        binding.editTextRecord.setText(runningPreferences.getString("${screenData.record} record", null))
-        binding.editTextDate.setText(runningPreferences.getString("${screenData.record} date", null))
+        binding.editTextRecord.setText(runningPreferences.getString("${screenData.record} $SHARED_PREFERENCE_RECORD_KEY", null))
+        binding.editTextDate.setText(runningPreferences.getString("${screenData.record} $SHARED_PREFERENCE_DATE_KEY", null))
     }
 
     private fun saveRecord() {
@@ -60,8 +59,8 @@ class EditRecordActivity : AppCompatActivity() {
         val runningPreferences = getSharedPreferences(screenData.sharedPreferencesName, MODE_PRIVATE)
 
         runningPreferences.edit {
-            putString("${this@EditRecordActivity.screenData.record} record", record)
-            putString("${this@EditRecordActivity.screenData.record} date", date)
+            putString("${this@EditRecordActivity.screenData.record} $SHARED_PREFERENCE_RECORD_KEY", record)
+            putString("${this@EditRecordActivity.screenData.record} $SHARED_PREFERENCE_DATE_KEY", date)
         }
     }
 
@@ -78,6 +77,11 @@ class EditRecordActivity : AppCompatActivity() {
         val recordFieldHint: String
     ): Serializable
 
+    companion object {
 
+        const val SHARED_PREFERENCE_RECORD_KEY = "record"
+        const val SHARED_PREFERENCE_DATE_KEY = "date"
+
+    }
 }
 
